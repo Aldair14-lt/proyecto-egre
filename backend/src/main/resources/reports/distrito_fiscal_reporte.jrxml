@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="distrito_fiscal_reporte" 
+              pageWidth="595" 
+              pageHeight="842" 
+              columnWidth="555" 
+              leftMargin="20" 
+              rightMargin="20" 
+              topMargin="20" 
+              bottomMargin="20">
+
+    <!-- Declaración de Parámetros -->
+    <parameter name="TITULO_REPORTE" class="java.lang.String"/>
+    <parameter name="TOTAL_REGISTROS" class="java.lang.Integer"/>
+
+    <!-- Mapeo de Campos de la Entidad DistritoFiscal -->
+    <field name="idDistritoFiscal" class="java.lang.Integer"/>
+    <field name="nombreDistrito" class="java.lang.String"/>
+
+    <!-- Banda de Encabezado / Título -->
+    <title>
+        <band height="65">
+            <rectangle radius="4">
+                <reportElement x="0" y="0" width="555" height="50" backcolor="#003366"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="10" width="555" height="30" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO_REPORTE}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <!-- Banda de Encabezado de Columnas -->
+    <columnHeader>
+        <band height="25">
+            <staticText>
+                <reportElement x="0" y="0" width="120" height="25" backcolor="#E0E0E0"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID DISTRITO]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="120" y="0" width="435" height="25" backcolor="#E0E0E0"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[NOMBRE DEL DISTRITO FISCAL]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Banda de Detalle (Iteración de registros de la BD) -->
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="120" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{idDistritoFiscal}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="120" y="0" width="435" height="20"/>
+                <box leftPadding="8"><pen lineWidth="0.5"/></box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{nombreDistrito}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- Banda de Pie de Página -->
+    <pageFooter>
+        <band height="30">
+            <line>
+                <reportElement x="0" y="5" width="555" height="1"/>
+            </line>
+            <textField>
+                <reportElement x="0" y="8" width="555" height="20"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="9" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total de distritos fiscales registrados: " + $P{TOTAL_REGISTROS}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+</jasperReport>
