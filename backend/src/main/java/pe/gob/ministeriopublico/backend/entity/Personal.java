@@ -1,6 +1,9 @@
 package pe.gob.ministeriopublico.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Representa a una persona y su tipo de personal. */
 @Entity
@@ -15,6 +18,14 @@ public class Personal {
     @Column(name = "apellido_materno") private String apellidoMaterno;
     @Column(name = "correo") private String correo;
     @Column(name = "telefono") private String telefono;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_personal", insertable = false, updatable = false)
+    private TipoPersonal tipoPersonal;
+
+    @OneToMany(mappedBy = "personal")
+    @JsonIgnore
+    private List<AsignacionEquipo> asignaciones = new ArrayList<>();
 
     public Personal() { }
     public Integer getIdPersonal() { return idPersonal; }
@@ -33,4 +44,8 @@ public class Personal {
     public void setCorreo(String correo) { this.correo = correo; }
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
+    public TipoPersonal getTipoPersonal() { return tipoPersonal; }
+    public void setTipoPersonal(TipoPersonal tipoPersonal) { this.tipoPersonal = tipoPersonal; }
+    public List<AsignacionEquipo> getAsignaciones() { return asignaciones; }
+    public void setAsignaciones(List<AsignacionEquipo> asignaciones) { this.asignaciones = asignaciones; }
 }

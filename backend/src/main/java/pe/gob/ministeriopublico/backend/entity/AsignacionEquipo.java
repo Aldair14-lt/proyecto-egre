@@ -17,6 +17,18 @@ public class AsignacionEquipo {
     @Column(name = "observacion") private String observacion;
     @Column(name = "fecha_registro") private LocalDateTime fechaRegistro;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_equipo", insertable = false, updatable = false)
+    private Equipo equipo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_despacho", insertable = false, updatable = false)
+    private Despacho despacho;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_personal", insertable = false, updatable = false)
+    private Personal personal;
+
     public AsignacionEquipo() { }
     public Integer getIdAsignacion() { return idAsignacion; }
     public void setIdAsignacion(Integer idAsignacion) { this.idAsignacion = idAsignacion; }
@@ -34,4 +46,10 @@ public class AsignacionEquipo {
     public void setObservacion(String observacion) { this.observacion = observacion; }
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public Equipo getEquipo() { return equipo; }
+    public void setEquipo(Equipo equipo) { this.equipo = equipo; }
+    public Despacho getDespacho() { return despacho; }
+    public void setDespacho(Despacho despacho) { this.despacho = despacho; }
+    public Personal getPersonal() { return personal; }
+    public void setPersonal(Personal personal) { this.personal = personal; }
 }

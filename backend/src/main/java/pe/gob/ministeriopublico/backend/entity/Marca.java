@@ -1,11 +1,15 @@
 package pe.gob.ministeriopublico.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 // Identificando una entidad
 @Entity
@@ -21,6 +25,10 @@ public class Marca {
 
 	@Column(name = "nombre_marca")
 	private String nombreMarca;
+
+	@OneToMany(mappedBy = "marca")
+	@JsonIgnore
+	private List<Modelo> modelos = new ArrayList<>();
 
 	// Constructor vacio
 	public Marca() {
@@ -46,5 +54,13 @@ public class Marca {
 
 	public void setNombreMarca(String nombreMarca) {
 		this.nombreMarca = nombreMarca;
+	}
+
+	public List<Modelo> getModelos() {
+		return modelos;
+	}
+
+	public void setModelos(List<Modelo> modelos) {
+		this.modelos = modelos;
 	}
 }

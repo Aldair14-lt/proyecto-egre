@@ -1,7 +1,10 @@
 package pe.gob.ministeriopublico.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Representa una cuenta de usuario del sistema. */
 @Entity
@@ -15,6 +18,10 @@ public class Usuario {
     @Column(name = "correo_electronico") private String correoElectronico;
     @Column(name = "estado") private String estado;
     @Column(name = "fecha_creacion") private LocalDateTime fechaCreacion;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<UsuarioRol> usuariosRoles = new ArrayList<>();
 
     public Usuario() { }
     public Integer getIdUsuario() { return idUsuario; }
@@ -31,4 +38,6 @@ public class Usuario {
     public void setEstado(String estado) { this.estado = estado; }
     public LocalDateTime getFechaCreacion() { return fechaCreacion; }
     public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+    public List<UsuarioRol> getUsuariosRoles() { return usuariosRoles; }
+    public void setUsuariosRoles(List<UsuarioRol> usuariosRoles) { this.usuariosRoles = usuariosRoles; }
 }

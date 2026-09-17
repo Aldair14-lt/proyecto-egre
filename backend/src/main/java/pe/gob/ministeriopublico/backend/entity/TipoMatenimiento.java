@@ -1,11 +1,15 @@
 package pe.gob.ministeriopublico.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 // Identificando una entidad
 @Entity
@@ -24,6 +28,10 @@ public class TipoMatenimiento {
 
 	@Column(name = "descripcion")
 	private String descripcion;
+
+	@OneToMany(mappedBy = "tipoMantenimiento")
+	@JsonIgnore
+	private List<Mantenimiento> mantenimientos = new ArrayList<>();
 
 	// Constructor vacio
 	public TipoMatenimiento() {
@@ -58,5 +66,13 @@ public class TipoMatenimiento {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public List<Mantenimiento> getMantenimientos() {
+		return mantenimientos;
+	}
+
+	public void setMantenimientos(List<Mantenimiento> mantenimientos) {
+		this.mantenimientos = mantenimientos;
 	}
 }

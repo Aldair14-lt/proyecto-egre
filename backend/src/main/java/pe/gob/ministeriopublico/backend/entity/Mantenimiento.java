@@ -19,6 +19,14 @@ public class Mantenimiento {
     @Column(name = "observacion") private String observacion;
     @Column(name = "fecha_registro") private LocalDateTime fechaRegistro;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_equipo", insertable = false, updatable = false)
+    private Equipo equipo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_mantenimiento", insertable = false, updatable = false)
+    private TipoMatenimiento tipoMantenimiento;
+
     public Mantenimiento() { }
     public Integer getIdMantenimiento() { return idMantenimiento; }
     public void setIdMantenimiento(Integer idMantenimiento) { this.idMantenimiento = idMantenimiento; }
@@ -40,4 +48,8 @@ public class Mantenimiento {
     public void setObservacion(String observacion) { this.observacion = observacion; }
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public Equipo getEquipo() { return equipo; }
+    public void setEquipo(Equipo equipo) { this.equipo = equipo; }
+    public TipoMatenimiento getTipoMantenimiento() { return tipoMantenimiento; }
+    public void setTipoMantenimiento(TipoMatenimiento tipoMantenimiento) { this.tipoMantenimiento = tipoMantenimiento; }
 }

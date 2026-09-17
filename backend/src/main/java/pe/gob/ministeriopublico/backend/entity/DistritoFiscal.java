@@ -1,11 +1,15 @@
 package pe.gob.ministeriopublico.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 //identificanco un Entidad
 @Entity
@@ -24,6 +28,10 @@ private Integer idDistritoFiscal;
 
 @Column(name="nombre_distrito")
 private String nombreDistrito;
+
+@OneToMany(mappedBy = "distritoFiscal")
+@JsonIgnore
+private List<Sede> sedes = new ArrayList<>();
 
 //constructor vacio 
 public DistritoFiscal(){
@@ -49,6 +57,14 @@ public String getNombreDistrito() {
 }
 public void setNombreDistrito(String nombreDistrito) {
     this.nombreDistrito = nombreDistrito;
+}
+
+public List<Sede> getSedes() {
+    return sedes;
+}
+
+public void setSedes(List<Sede> sedes) {
+    this.sedes = sedes;
 }
 
 

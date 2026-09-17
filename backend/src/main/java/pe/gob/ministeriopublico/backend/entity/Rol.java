@@ -1,11 +1,15 @@
 package pe.gob.ministeriopublico.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 // Identificando una entidad
 @Entity
@@ -21,6 +25,10 @@ public class Rol {
 
 	@Column(name = "nombre_rol")
 	private String nombreRol;
+
+	@OneToMany(mappedBy = "rol")
+	@JsonIgnore
+	private List<UsuarioRol> usuariosRoles = new ArrayList<>();
 
 	// Constructor vacio
 	public Rol() {
@@ -46,5 +54,13 @@ public class Rol {
 
 	public void setNombreRol(String nombreRol) {
 		this.nombreRol = nombreRol;
+	}
+
+	public List<UsuarioRol> getUsuariosRoles() {
+		return usuariosRoles;
+	}
+
+	public void setUsuariosRoles(List<UsuarioRol> usuariosRoles) {
+		this.usuariosRoles = usuariosRoles;
 	}
 }
