@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
 import pe.gob.ministeriopublico.backend.entity.*;
 import pe.gob.ministeriopublico.backend.repository.*;
 
@@ -66,104 +65,119 @@ public class BulkController {
         this.usuarioRolRepository = usuarioRolRepository;
     }
 
-    // 1. Catálogo Base
+    // Fase 1: Catálogos Base
     @PostMapping("/distritos-fiscales")
-@Transactional
-public ResponseEntity<String> bulkDistritosFiscales(@RequestBody List<DistritoFiscal> lista) {
-    distritoFiscalRepository.saveAll(lista);
-    return ResponseEntity.status(HttpStatus.CREATED)
-            .body("Carga masiva completada. Registros insertados: " + lista.size());
-}
+    @Transactional
+    public ResponseEntity<String> bulkDistritosFiscales(@RequestBody List<DistritoFiscal> lista) {
+        distritoFiscalRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " distritos fiscales.");
+    }
 
     @PostMapping("/clasificaciones")
     @Transactional
-    public ResponseEntity<List<Clasificacion>> bulkClasificaciones(@RequestBody List<Clasificacion> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(clasificacionRepository.saveAll(lista));
+    public ResponseEntity<String> bulkClasificaciones(@RequestBody List<Clasificacion> lista) {
+        clasificacionRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertadas " + lista.size() + " clasificaciones.");
     }
 
     @PostMapping("/marcas")
     @Transactional
-    public ResponseEntity<List<Marca>> bulkMarcas(@RequestBody List<Marca> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(marcaRepository.saveAll(lista));
+    public ResponseEntity<String> bulkMarcas(@RequestBody List<Marca> lista) {
+        marcaRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertadas " + lista.size() + " marcas.");
     }
 
     @PostMapping("/estados-equipo")
     @Transactional
-    public ResponseEntity<List<EstadoEquipo>> bulkEstadosEquipo(@RequestBody List<EstadoEquipo> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(estadoEquipoRepository.saveAll(lista));
+    public ResponseEntity<String> bulkEstadosEquipo(@RequestBody List<EstadoEquipo> lista) {
+        estadoEquipoRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " estados de equipo.");
     }
 
     @PostMapping("/tipos-mantenimiento")
     @Transactional
-    public ResponseEntity<List<TipoMatenimiento>> bulkTiposMantenimiento(@RequestBody List<TipoMatenimiento> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(tipoMatenimientoRepository.saveAll(lista));
+    public ResponseEntity<String> bulkTiposMantenimiento(@RequestBody List<TipoMatenimiento> lista) {
+        tipoMatenimientoRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " tipos de mantenimiento.");
     }
 
     @PostMapping("/tipos-personal")
     @Transactional
-    public ResponseEntity<List<TipoPersonal>> bulkTiposPersonal(@RequestBody List<TipoPersonal> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(tipoPersonalRepository.saveAll(lista));
+    public ResponseEntity<String> bulkTiposPersonal(@RequestBody List<TipoPersonal> lista) {
+        tipoPersonalRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " tipos de personal.");
     }
 
     @PostMapping("/roles")
     @Transactional
-    public ResponseEntity<List<Rol>> bulkRoles(@RequestBody List<Rol> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(rolRepository.saveAll(lista));
+    public ResponseEntity<String> bulkRoles(@RequestBody List<Rol> lista) {
+        rolRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " roles.");
     }
 
-    // 2. Entidades Intermedias
+    // Fase 2: Estructura Organizacional y Modelos
     @PostMapping("/sedes")
     @Transactional
-    public ResponseEntity<List<Sede>> bulkSedes(@RequestBody List<Sede> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(sedeRepository.saveAll(lista));
+    public ResponseEntity<String> bulkSedes(@RequestBody List<Sede> lista) {
+        sedeRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertadas " + lista.size() + " sedes.");
     }
 
     @PostMapping("/despachos")
     @Transactional
-    public ResponseEntity<List<Despacho>> bulkDespachos(@RequestBody List<Despacho> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(despachoRepository.saveAll(lista));
+    public ResponseEntity<String> bulkDespachos(@RequestBody List<Despacho> lista) {
+        despachoRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " despachos.");
     }
 
     @PostMapping("/modelos")
     @Transactional
-    public ResponseEntity<List<Modelo>> bulkModelos(@RequestBody List<Modelo> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(modeloRepository.saveAll(lista));
+    public ResponseEntity<String> bulkModelos(@RequestBody List<Modelo> lista) {
+        modeloRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " modelos.");
     }
 
+    // Fase 3: Personal y Usuarios
     @PostMapping("/personal")
     @Transactional
-    public ResponseEntity<List<Personal>> bulkPersonal(@RequestBody List<Personal> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(personalRepository.saveAll(lista));
+    public ResponseEntity<String> bulkPersonal(@RequestBody List<Personal> lista) {
+        personalRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " registros de personal.");
     }
 
     @PostMapping("/usuarios")
     @Transactional
-    public ResponseEntity<List<Usuario>> bulkUsuarios(@RequestBody List<Usuario> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.saveAll(lista));
+    public ResponseEntity<String> bulkUsuarios(@RequestBody List<Usuario> lista) {
+        usuarioRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " usuarios.");
     }
 
     @PostMapping("/usuarios-roles")
     @Transactional
-    public ResponseEntity<List<UsuarioRol>> bulkUsuariosRoles(@RequestBody List<UsuarioRol> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRolRepository.saveAll(lista));
+    public ResponseEntity<String> bulkUsuariosRoles(@RequestBody List<UsuarioRol> lista) {
+        usuarioRolRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " asignaciones usuario-rol.");
     }
 
-    // 3. Entidades Principales y Transaccionales
+    // Fase 4: Equipos y Transacciones
     @PostMapping("/equipos")
     @Transactional
-    public ResponseEntity<List<Equipo>> bulkEquipos(@RequestBody List<Equipo> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(equipoRepository.saveAll(lista));
+    public ResponseEntity<String> bulkEquipos(@RequestBody List<Equipo> lista) {
+        equipoRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " equipos.");
     }
 
     @PostMapping("/asignaciones-equipo")
     @Transactional
-    public ResponseEntity<List<AsignacionEquipo>> bulkAsignacionesEquipo(@RequestBody List<AsignacionEquipo> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(asignacionEquipoRepository.saveAll(lista));
+    public ResponseEntity<String> bulkAsignacionesEquipo(@RequestBody List<AsignacionEquipo> lista) {
+        asignacionEquipoRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertadas " + lista.size() + " asignaciones de equipo.");
     }
 
     @PostMapping("/mantenimientos")
     @Transactional
-    public ResponseEntity<List<Mantenimiento>> bulkMantenimientos(@RequestBody List<Mantenimiento> lista) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(mantenimientoRepository.saveAll(lista));
+    public ResponseEntity<String> bulkMantenimientos(@RequestBody List<Mantenimiento> lista) {
+        mantenimientoRepository.saveAll(lista);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Insertados " + lista.size() + " mantenimientos.");
     }
 }
